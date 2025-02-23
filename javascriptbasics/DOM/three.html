@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body class ='body'>
+    <ul class="list">
+        <li>javascript</li>
+    </ul>    
+</body>
+<script>
+    function addLang(langname){
+        const li =document.createElement('li')
+        li.innerHTML = langname;
+        const list =document.querySelector('.list')
+        list.appendChild(li)
+    }
+
+    addLang('python')
+
+    function addlangtwo(langname){
+        const li = document.createElement('li')
+        const but =document.createElement('button')
+        but.setAttribute('class','clickme')
+        but.style.borderRadius='15px'
+        but.style.color ='white'
+        but.style.backgroundColor ='black'
+       
+
+        but.textContent ='LOGIN'
+        const sel =document.querySelector('body')
+        sel.appendChild(but)
+        sel.style.backgroundColor ='grey'
+
+        const tar=document.querySelector('.clickme')
+        const par =document.createElement('p')
+        const partext = document.createTextNode('hallo this is kamal and iam from frankfurt i studzy web development')
+        par.appendChild(partext)
+        tar.insertAdjacentElement('beforebegin',par)
+
+         // example Prepend
+        const addbefore =document.createElement('textarea')
+        sel.prepend(addbefore)
+
+        const h1=document.createElement('h1')
+        const h1text = document.createTextNode('hallo this is kamal and iam from frankfurt i studzy web development')
+        h1.appendChild(h1text)
+        
+        sel.replaceChild(h1,par)
+
+
+
+        const litext=document.createTextNode(langname)
+        li.appendChild(litext)
+        document.querySelector('.list').appendChild(li)
+}
+addlangtwo('react native')
+
+</script>
+
+</html>
