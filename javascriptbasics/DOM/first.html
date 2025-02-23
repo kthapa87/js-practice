@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DOM learning</title>
+</head>
+<body>
+<div class="bg-black">
+    <h1 id='title' class="'heading"> DOM learning on chai aur code
+    <span style="display:block;"> this is span <textarea name='input' id="userinput" cols="30"></textarea></span>
+</h1>
+    <p> Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+    <input type="password" name="" id="">
+</div>
+
+<!--
+but
+<button class=​"but-logIn" style=​"color:​ white;​ background-color:​ green;​ padding:​ 5px;​ border:​ 40px;​">​CLICK ME​</button>​
+but.style.border ='15px'
+'15px'
+but.style.border-radius ='15px'
+VM2951:1 Uncaught SyntaxError: Invalid left-hand side in assignment
+but.style.borderRadius ='15px'
+'15px'
+but.style.borderRadius ='10px'
+'10px'
+but
+<button class=​"but-logIn" style=​"color:​ white;​ background-color:​ green;​ padding:​ 5px;​ border:​ 15px;​ border-radius:​ 10px;​">​CLICK ME​</button>​
+const ul = document.createElement('ul')
+undefined
+ul
+<ul>​</ul>​
+for(let i =0;i<5;i++){
+    const li = document.createElement('li')
+    ul.appendChild(li);
+}
+<li>​</li>​
+ul
+<ul>​<li>​</li>​<li>​</li>​<li>​</li>​<li>​</li>​<li>​</li>​</ul>​
+but.insertAdjacentElement('beforeend',ul)
+<ul>​…​</ul>​
+but.insertAdjacentElement('afterend',ul)
+<ul>​…​</ul>​
+but.parentNode.insertBefore(ul,but)
+<ul>​…​</ul>​
+const listItems =['python','java','c++','PHP','javascript','Angular','Typescript']
+undefined
+listItems
+(7) ['python', 'java', 'c++', 'PHP', 'javascript', 'Angular', 'Typescript']
+listItems.forEach( (item) =>{
+    const liValue =document.querySelector('li');
+    liValue.textContent = item;
+    ul.appendChild(li);
+});
+VM4717:4 Uncaught ReferenceError: li is not defined
+    at <anonymous>:4:20
+    at Array.forEach (<anonymous>)
+    at <anonymous>:1:11
+(anonymous) @ VM4717:4
+(anonymous) @ VM4717:1
+const listItems =['python','java','c++','PHP','javascript','Angular','Typescript']
+const liValue =document.querySelector('li');
+listItems.forEach( (item) =>{
+    liValue.textContent = item;
+    ul.appendChild(li);
+});
+
+VM4842:5 Uncaught ReferenceError: li is not defined
+    at <anonymous>:5:20
+    at Array.forEach (<anonymous>)
+    at <anonymous>:3:11
+(anonymous) @ VM4842:5
+(anonymous) @ VM4842:3
+li
+VM4874:1 Uncaught ReferenceError: li is not defined
+    at <anonymous>:1:1
+(anonymous) @ VM4874:1
+liValue
+<li>​…​</li>​
+const listItems =['python','java','c++','PHP','javascript','Angular','Typescript']
+const liValue =document.querySelector('li');
+listItems.forEach( (item) =>{
+    liValue.textContent = item;
+    ul.appendChild(liValue);
+});
+
+undefined
+const listItems =['python','java','c++','PHP','javascript','Angular','Typescript']
+
+listItems.forEach( (item) =>{
+    const liValue =document.querySelector('li');
+    liValue.textContent = item;
+    ul.appendChild(liValue);
+});
+
+undefined
+const listItems =['python','java','c++','PHP','javascript']
+
+listItems.forEach( (item) =>{
+    const liValue =document.querySelector('li');
+    liValue.textContent = item;
+    ul.appendChild(liValue);
+});
+undefined
+const listItems =['python','java','c++','PHP','javascript','Angular','Typescript']
+
+listItems.forEach( (item) =>{
+    const liValue =document.querySelector('li');
+    liValue.textContent = item;
+    ul.appendChild(liValue);
+});
+
+undefined
+li
+VM5067:1 Uncaught ReferenceError: li is not defined
+    at <anonymous>:1:1
+(anonymous) @ VM5067:1
+liValue
+<li>​…​</li>​::marker​"c++"</li>​
+ul
+<ul>​…​</ul>​
+ul.setAttribute('class','prog-list')
+undefined
+ul
+<ul class=​"prog-list">​…​</ul>​
+li
+VM5498:1 Uncaught ReferenceError: li is not defined
+    at <anonymous>:1:1
+(anonymous) @ VM5498:1
+ul
+<ul class=​"prog-list">​…​</ul>​<li>​…​</li>​<li>​…​</li>​<li>​…​</li>​<li>​…​</li>​<li>​…​</li>​</ul>​
+const li = ul.querySelector('li')
+undefined
+li
+<li>​…​</li>​::marker​"c++"</li>​
+const li = ul.querySelectorAll('li')
+undefined
+li
+NodeList(5) [li, li, li, li, li]0: li1: li2: li3: li4: lilength: 5[[Prototype]]: NodeList
+const items = Array.from(li)
+undefined
+items
+(5) [li, li, li, li, li]
+const ang = items.filter( (item) =>{item.textContent ==='Angular')
+VM5934:1 Uncaught SyntaxError: Unexpected token ')'
+const ang = items.filter( (item) =>{item.textContent ==='Angular'}
+VM5944:1 Uncaught SyntaxError: missing ) after argument list
+const ang = items.filter( (item) =>{item.textContent ==='Angular'});
+undefined
+ang
+[]length: 0[[Prototype]]: Array(0)
+ang.forEach( (it) => { it.textContent = 'PHP'});
+undefined
+const ang = items.filter( (item) =>{item.textContent ==='Angular'});
+ang.forEach(item =>{item.textContent ='PHP'});
+undefined
+const ang = items.filter( (item) =>{item.textContent ==='Angular'});
+ang.forEach(ite =>{ite.textContent ='PHP'});
+undefined
+const ang = items.filter( (item) =>{item.textContent ==='Angular'});
+undefined
+ang
+[]
+const ang = items.filter(item =>{item.textContent ==='Angular'});
+undefined
+ang
+[]
+ang.length
+0
+li
+NodeList(5) [li, li, li, li, li]
+items
+(5) [li, li, li, li, li]
+items.length
+5
+const newlist= ul.createElement('li')
+VM6636:1 Uncaught TypeError: ul.createElement is not a function
+    at <anonymous>:1:19
+(anonymous) @ VM6636:1
+ul
+<ul class=​"prog-list">​…​</ul>​
+const newlist= document.createElement('li')
+undefined
+newlist
+<li>​</li>​
+ul.appendChild(newlist)
+<li>​…​</li>​::marker​</li>​
+newlist.textContent ='PHP'
+'PHP'
+li
+NodeList(5) [li, li, li, li, li]
+ul
+<ul class=​"prog-list">​…​</ul>​
+const li = ul.querySelectorAll('li')
+undefined
+li
+NodeList(6) [li, li, li, li, li, li]
+li.innerText
+undefined
+const newList = Array.from(li)
+undefined
+newList
+(6) [li, li, li, li, li, li]0: liaccessKey: ""ariaAtomic: nullariaAutoComplete: nullariaBrailleLabel: nullariaBrailleRoleDescription: nullariaBusy: nullariaChecked: nullariaColCount: nullariaColIndex: nullariaColIndexText: nullariaColSpan: nullariaCurrent: nullariaDescription: nullariaDisabled: nullariaExpanded: nullariaHasPopup: nullariaHidden: nullariaInvalid: nullariaKeyShortcuts: nullariaLabel: nullariaLevel: nullariaLive: nullariaModal: nullariaMultiLine: nullariaMultiSelectable: nullariaOrientation: nullariaPlaceholder: nullariaPosInSet: nullariaPressed: nullariaReadOnly: nullariaRelevant: nullariaRequired: nullariaRoleDescription: nullariaRowCount: nullariaRowIndex: nullariaRowIndexText: nullariaRowSpan: nullariaSelected: nullariaSetSize: nullariaSort: nullariaValueMax: nullariaValueMin: nullariaValueNow: nullariaValueText: nullassignedSlot: nullattributeStyleMap: StylePropertyMap {size: 0}attributes: NamedNodeMap {length: 0}autocapitalize: ""autofocus: falsebaseURI: "https://shiny-zebra-4jgq54vgg9rq25jr7-5500.app.github.dev/javascriptbasics/DOM/first.html"childElementCount: 0childNodes: NodeList [text]children: HTMLCollection []classList: DOMTokenList [value: '']className: ""clientHeight: 20clientLeft: 0clientTop: 0clientWidth: 365contentEditable: "inherit"currentCSSZoom: 1dataset: DOMStringMap {}dir: ""draggable: falseeditContext: nullelementTiming: ""enterKeyHint: ""firstChild: textfirstElementChild: nullhidden: falseid: ""inert: falseinnerHTML: "c++"innerText: "c++"inputMode: ""isConnected: trueisContentEditable: falselang: ""lastChild: textlastElementChild: nulllocalName: "li"namespaceURI: "http://www.w3.org/1999/xhtml"nextElementSibling: linextSibling: linodeName: "LI"nodeType: 1nodeValue: nullnonce: ""offsetHeight: 20offsetLeft: 48offsetParent: bodyoffsetTop: 295offsetWidth: 365onabort: nullonanimationend: nullonanimationiteration: nullonanimationstart: nullonauxclick: nullonbeforecopy: nullonbeforecut: nullonbeforeinput: nullonbeforematch: nullonbeforepaste: nullonbeforetoggle: nullonbeforexrselect: nullonblur: nulloncancel: nulloncanplay: nulloncanplaythrough: nullonchange: nullonclick: nullonclose: nulloncontentvisibilityautostatechange: nulloncontextlost: nulloncontextmenu: nulloncontextrestored: nulloncopy: nulloncuechange: nulloncut: nullondblclick: nullondrag: nullondragend: nullondragenter: nullondragleave: nullondragover: nullondragstart: nullondrop: nullondurationchange: nullonemptied: nullonended: nullonerror: nullonfocus: nullonformdata: nullonfullscreenchange: nullonfullscreenerror: nullongotpointercapture: nulloninput: nulloninvalid: nullonkeydown: nullonkeypress: nullonkeyup: nullonload: nullonloadeddata: nullonloadedmetadata: nullonloadstart: nullonlostpointercapture: nullonmousedown: nullonmouseenter: nullonmouseleave: nullonmousemove: nullonmouseout: nullonmouseover: nullonmouseup: nullonmousewheel: nullonpaste: nullonpause: nullonplay: nullonplaying: nullonpointercancel: nullonpointerdown: nullonpointerenter: nullonpointerleave: nullonpointermove: nullonpointerout: nullonpointerover: nullonpointerrawupdate: nullonpointerup: nullonprogress: nullonratechange: nullonreset: nullonresize: nullonscroll: nullonscrollend: nullonscrollsnapchange: nullonscrollsnapchanging: nullonsearch: nullonsecuritypolicyviolation: nullonseeked: nullonseeking: nullonselect: nullonselectionchange: nullonselectstart: nullonslotchange: nullonstalled: nullonsubmit: nullonsuspend: nullontimeupdate: nullontoggle: nullontransitioncancel: nullontransitionend: nullontransitionrun: nullontransitionstart: nullonvolumechange: nullonwaiting: nullonwebkitanimationend: nullonwebkitanimationiteration: nullonwebkitanimationstart: nullonwebkitfullscreenchange: nullonwebkitfullscreenerror: nullonwebkittransitionend: nullonwheel: nullouterHTML: "<li>c++</li>"outerText: "c++"ownerDocument: documentparentElement: ul.prog-listparentNode: ul.prog-listpart: DOMTokenList [value: '']popover: nullprefix: nullpreviousElementSibling: nullpreviousSibling: nullrole: nullscrollHeight: 20scrollLeft: 0scrollTop: 0scrollWidth: 365shadowRoot: nullslot: ""spellcheck: truestyle: CSSStyleDeclaration {accentColor: '', additiveSymbols: '', alignContent: '', alignItems: '', alignSelf: '', …}tabIndex: -1tagName: "LI"textContent: "c++"title: ""translate: truetype: ""value: 0virtualKeyboardPolicy: ""writingSuggestions: "true"[[Prototype]]: HTMLLIElement(...)1: li2: li3: li4: li5: lilength: 6[[Prototype]]: Array(0)
+newList.filter(item =>{item.textContent === 'PHP'});
+[]length: 0[[Prototype]]: Array(0)
+const php= newList.filter(item =>{item.textContent === 'PHP'});
+undefined
+php
+[]length: 0[[Prototype]]: Array(0)
+php.forEach(i => {i.textContent ='pythonDjango'});
+undefined
+const php= newList.filter(item =>item.textContent === 'PHP');
+undefined
+php
+(2) [li, li]
+ const pyt = php.forEach(i => {i.textContent ='pythonDjango'});
+undefined
+const php= newList.filter((item) =>{item.textContent === 'pythonDjango'});
+undefined
+pyt
+undefined
+php
+[]length: 0[[Prototype]]: Array(0)
+const php= newList.filter((item) =>{item.textContent === 'pythonDjango'});
+undefined
+const php= newList.filter((item) =>{
+    return item.textContent === 'pythonDjango'
+});
+undefined
+php
+(2) [li, li]
+const php= newList.filter((item) =>{
+    return item.textContent === 'pythonDjango'
+}).forEach(val =>{val.textContent ='PHP'});
+-->
+</body>
+</html>
