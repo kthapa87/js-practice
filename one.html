@@ -52,7 +52,7 @@
         console.log('parrent node of item which is clicked',e.target.parentNode);
         const pNode =e.target.parentNode
         console.log('parent node',pNode);
-        
+       
         const pNode2 =pNode.parentNode
         console.log('parent node two ',pNode2);
         
@@ -67,7 +67,8 @@
              console.log('counter is',c,' type of counter is',typeof(c))
              
          }
-         else{
+         else if(e.target.tagName === 'IMG')
+         {
             alert('you have deleted maximum number of images allowed')
          }
 

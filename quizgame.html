@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Game</title>
+</head>
+<body>
+    <h1>Quiz Game</h1>
+    <label for="start-time">Enter start time (in seconds): </label>
+    <input type="number" id="start-time" min="1">
+    <button id="start-game">Start Game</button>
+    <div id="quiz" style="display:block;">
+        <h2>Question: What is the capital of France?</h2>
+        <p id="timer">Time left: <span id="time">120</span> seconds</p>
+        <p id="warning" style="color:red; display:none;">Hurry up! Only 1 minute left!</p>
+    </div>
+    <div id="event-timer">
+        <h2>Event Countdown</h2>
+        <p id="countdown">Time left: <span id="days">0</span> days <span id="hours">0</span> hours <span id="minutes">0</span> minutes <span id="seconds">0</span> seconds</p>
+    </div>
+    <script>
+        // document.getElementById('start-game').addEventListener('click', function() {
+        //     const startTime = parseInt(document.getElementById('start-time').value);
+        //     if (isNaN(startTime) || startTime < 1) {
+        //         alert('Please enter a valid start time.');
+        //         return;
+        //     }
+        //     setTimeout(startQuiz, startTime * 1000);
+        // });
+
+        // function startQuiz() {
+        //     document.getElementById('quiz').style.display = 'block';
+        //     let timeLeft = 120;
+        //     const countdown = function() {
+        //         if (timeLeft > 0) {
+        //             timeLeft--;
+        //             document.getElementById('time').textContent = timeLeft;
+        //             if (timeLeft === 60) {
+        //                 document.getElementById('warning').style.display = 'block';
+        //             }
+        //             setTimeout(countdown, 1000);
+        //         } else {
+        //             document.getElementById('quiz').innerHTML = "<h2>Time's up!</h2>";
+        //         }
+        //     }
+        //     countdown();
+        // }
+
+        // const eventDate = new Date("December 31, 2025 23:59:59").getTime();
+        //  const now = new Date().getTime();
+        // const di=document.querySelector('#start-game')
+        // const time = document.createElement('h1');
+        // const timeText=document.createTextNode('now');
+        // time.appendChild(timeText);
+        // di.insertAdjacentElement('beforebegin',time)
+        // const updateTimer = function() {
+        // const now = new Date().getTime();
+       
+        //     time.textContent =now;
+        //     const distance = eventDate - now;
+           
+        //     console.log('time element',time)
+        //     console.log('time now is ',now)
+        //     if (distance > 0) {
+        //         const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        //         const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        //         const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        //         const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        //         document.getElementById('days').textContent = days;
+        //         document.getElementById('hours').textContent = hours;
+        //         document.getElementById('minutes').textContent = minutes;
+        //         document.getElementById('seconds').textContent = seconds;
+
+        //         setTimeout(updateTimer, 1000);
+        //     } else {
+        //         document.getElementById('countdown').textContent = "The event has started!";
+        //     }
+        // }
+        // updateTimer();
+        const quizDiv = document.getElementById('quiz');
+        const newButton = document.createElement('button');
+        newButton.textContent = 'Start Event';
+        newButton.id = 'newbut';
+        quizDiv.appendChild(newButton);
+        
+        quizDiv.style.display = 'block'; // Ensure the quiz div is visible
+        const body =document.querySelector('body')
+        function random()
+        {        
+            const color = '0123456789ABCDEF'
+            let col='#'
+            for (let index = 0; index < 6; index++)
+            {
+                col=col + color[Math.floor(Math.random()*16)];
+            }
+        return col;
+        }
+      const colorValue =  random()
+     
+      console.log('color value generated',colorValue)
+      let settime;
+      function updatecol(){
+        document.body.style.backgroundColor = random();
+ 
+
+
+        settime = setTimeout(updatecol,1000);
+    }
+
+    updatecol()
+
+    document.getElementById('newbut').addEventListener('click', function() {
+      clearTimeout(settime);
+    });
+      // console.log('random number is ',ran);
+        // function updateBg(){
+        //     body.
+
+
+        // }
+        
+        
+        // setTimeout(updateBg,1000)
+
+
+</script>
+</body>
+</html>
