@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .color1 { background-color: red; }
+        .color2 { background-color: blue; }
+        .color3 { background-color: green; }
+        .color4 { background-color: yellow; }
+        span { padding: 10px; margin: 5px; display: inline-block; }
+        button { margin-top: 20px; padding: 10px 20px; }
+    </style>
+    <title>Colorful Spans</title>
+</head>
+<body>
+    <span class="color1">Span 1</span>
+    <span class="color2">Span 2</span>
+    <span class="color3">Span 3</span>
+    <span class="color4">Span 4</span>
+    <br>
+    <button id="colorButton">Change Colors</button>
+    <script>
+        const spans = document.querySelectorAll('span');
+        const button = document.getElementById('colorButton');
+
+        button.addEventListener('click', () => {
+            spans.forEach(span => {
+                span.style.backgroundColor = getRandomColor();
+            });
+        });
+
+        function getRandomColor() {
+            const letters = '0123456789ABCDEF';
+            let color = '#';
+            for (let i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
+    </script>
+</body>
+</html>
