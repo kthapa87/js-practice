@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Weather App</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    select, input, button {
+      padding: 10px;
+      margin: 10px 0;
+    }
+    #result {
+      margin-top: 20px;
+      font-size: 1.2em;
+    }
+  </style>
+</head>
+<body>
+  <h1>Weather App</h1>
+  <label for="country">Select a Country:</label>
+  <select id="country">
+    <option value="">Loading countries...</option>
+  </select>
+  <br>
+  <label for="city">Select a City:</label>
+  <select id="city" disabled>
+    <option value="">Select a country first</option>
+  </select>
+  <button onclick="getWeather()">Get Weather</button>
+
+  <div id="result"></div>
+
+  <script>
+    const apiKey = '1cb614ab5a621446ccb3dbe42275f36f'; // Replace with your OpenWeatherMap API key
+    const geoNamesUsername = 'kamal2025'; // Replace with your GeoNames username
+    let countriesData = [];
+
+    // Fetch list of countries and populate the dropdown
+    async function fetchCountries() {
+      try {
+        const response = await fetch('https://restcountries.com/v3.1/all');
+        const countries = await response.json();
+        countriesData = countries; // Store countries data for later use
+
+        const countrySelect = document.getElementById('country');
+        countrySelect.innerHTML = '<option value="">Select a country</option>';
+
+        countries.sort((a, b) => a.name.common.localeCompare(b.name.common)); // Sort countries alphabetically
+        countries.forEach(country => {
+          const option = document.createElement('option');
+          option.value = country.cca2; // Country code (e.g., US, IN, etc.)
+          option.textContent = country.name.common; // Country name
+          countrySelect.appendChild(option);
+        });
+        console.log('countries loaded',countriesData);
+        
+        // Add event listener to fetch cities when a country is selected
+        countrySelect.addEventListener('change', fetchCities);
+      } catch (error) {
+        console.error('Error fetching countries:', error);
+        document.getElementById('country').innerHTML = '<option value="">Failed to load countries</option>';
+      }
+    }
+
+    // Fetch cities for the selected country using GeoNames API
+    async function fetchCities() {
+      const country = document.getElementById('country').value;
+      const citySelect = document.getElementById('city');
+
+      if (!country) {
+        citySelect.innerHTML = '<option value="">Select a country first</option>';
+        citySelect.disabled = true;
+        return;
+      }
+
+      // Find the selected country's data
+      const selectedCountry = countriesData.find(c => c.cca2 === country);
+      // what does c.cca2 mean?
+      // cca2 is the country code of the country. it i used to uniquely identify the country.
+      //cca2 is a property of the country object which is used to uniquely identify the country.
+    
+      console.log('selected country:-',selectedCountry);
+      if (selectedCountry) {
+        console.log('Capital of selected country:', selectedCountry.capital);
+
+        console.log('border countries of selected country:', selectedCountry.borders);
+        console.log('continent of selected country:', selectedCountry.continents);
+        console.log('side of the driver of selected country',selectedCountry.car.side)
+        const lan= selectedCountry.languages;
+        console.log('languages of selected country:',lan)
+        for(const languageCode in lan){
+            console.log('languages of selected country:', lan[languageCode]);    
+        }
+        
+        //find out the name of the currency of the selected country
+        const currencies = selectedCountry.currencies;
+        console.log('currencies of selected country',currencies)
+        for (const currencyCode in currencies) {
+          console.log('Currency name of selected country:', currencies[currencyCode]);
+          console.log('Currency symbol of selected country:', currencies[currencyCode].symbol);
+        }
+      } else {
+        console.log('Capital not found for the selected country');
+      }
+
+      try {
+        // Fetch cities from GeoNames API
+        const response = await fetch(
+          `https://api.geonames.org/searchJSON?country=${country}&username=${geoNamesUsername}`
+        );
+        const data = await response.json();
+
+        // Check if the API returned valid data
+        if (!data.geonames || !Array.isArray(data.geonames)) {
+          throw new Error('No cities found for the selected country');
+        }
+
+        // Extract city names from the response
+        const cities = data.geonames.map(city => city.name);
+
+        // Populate the city dropdown
+        citySelect.innerHTML = '<option value="">Select a city</option>';
+        cities.forEach(city => {
+          const option = document.createElement('option');
+          option.value = city; // City name
+          option.textContent = city; // City name
+          citySelect.appendChild(option);
+        });
+
+        citySelect.disabled = false;
+      } catch (error) {
+        console.error('Error fetching cities:', error);
+        citySelect.innerHTML = '<option value="">Failed to load cities</option>';
+      }
+    }
+
+    // Fetch weather data for the selected city and country
+    async function getWeather() {
+      const country = document.getElementById('country').value;
+      const city = document.getElementById('city').value;
+
+      if (!country || !city) {
+        alert('Please select a country and a city.');
+        return;
+      }
+
+      const url = `https://api.openweathermap.org/data/2.5/weather?q=${city},${country}&appid=${apiKey}&units=metric`;
+
+      try {
+        const response = await fetch(url);
+        const data = await response.json();
+        console.log('weather data of selected country',data);
+        if (data.cod !== 200) {
+          throw new Error(data.message);
+        }
+
+        const sunrise = data.sys.sunrise; // Sunrise time (Unix timestamp)
+        const sunset = data.sys.sunset; // Sunset time (Unix timestamp)
+        const timezone = data.timezone; // Timezone offset in seconds
+
+        // Convert timestamps to the selected country's timezone
+        const sunriseTime = formatTime(sunrise, timezone);
+        const sunsetTime = formatTime(sunset, timezone);
+
+        // Display the results
+        document.getElementById('result').innerHTML = `
+          <p>City: ${data.name}, ${data.sys.country}</p>
+          <p>Sunrise: ${sunriseTime}</p>
+          <p>Sunset: ${sunsetTime}</p>
+        `;
+      } catch (error) {
+        console.error('Error:', error);
+        document.getElementById('result').innerHTML = `<p style="color: red;">Error: ${error.message}</p>`;
+      }
+    }
+
+    // Format time based on timezone offset
+    function formatTime(timestamp, timezone) {
+      const date = new Date((timestamp + timezone) * 1000); // Adjust for timezone
+      const formatter = new Intl.DateTimeFormat('en-US', {
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        timeZone: 'UTC', // Use UTC because we've already adjusted for timezone
+      });
+      return formatter.format(date);
+    }
+
+    // Fetch countries when the page loads
+    fetchCountries();
+  </script>
+</body>
+</html>
