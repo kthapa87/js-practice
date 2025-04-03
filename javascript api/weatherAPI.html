@@ -32,8 +32,11 @@
   </select>
   <button onclick="getWeather()">Get Weather</button>
 
-  <div id="result"></div>
+  <div id="result">
+    Weather information will be displayed here
+  </div>
 
+  <div id='resultWeather'></div>
   <script>
     const apiKey = '1cb614ab5a621446ccb3dbe42275f36f'; // Replace with your OpenWeatherMap API key
     const geoNamesUsername = 'kamal2025'; // Replace with your GeoNames username
@@ -42,6 +45,7 @@
     // Fetch list of countries and populate the dropdown
     async function fetchCountries() {
       try {
+        document.getElementById('result').innnerHTML = ''; // Clear previous results
         const response = await fetch('https://restcountries.com/v3.1/all');
         const countries = await response.json();
         countriesData = countries; // Store countries data for later use
@@ -70,7 +74,7 @@
     async function fetchCities() {
       const country = document.getElementById('country').value;
       const citySelect = document.getElementById('city');
-
+      document.getElementById('resultWeather').innerHTML = ''; // Clear previous weather results
       if (!country) {
         citySelect.innerHTML = '<option value="">Select a country first</option>';
         citySelect.disabled = true;
@@ -79,7 +83,8 @@
 
       // Find the selected country's data
       const selectedCountry = countriesData.find(c => c.cca2 === country);
-      // what does c.cca2 mean?
+      
+      // console.log('selected country is ', selectedCountry)// what does c.cca2 mean?
       // cca2 is the country code of the country. it i used to uniquely identify the country.
       //cca2 is a property of the country object which is used to uniquely identify the country.
     
@@ -109,20 +114,34 @@
 
       try {
         // Fetch cities from GeoNames API
-        const response = await fetch(
-          `https://api.geonames.org/searchJSON?country=${country}&username=${geoNamesUsername}`
-        );
+        console.log('selected country to fetch cities ', selectedCountry.name.common);
+        const countries=selectedCountry.name.common
+        const url=`https://countriesnow.space/api/v0.1/countries`;
+        const response = await fetch(url);
+          // `https://api.geonames.org/searchJSON?country=${country}&username=${geoNamesUsername}`
+        
         const data = await response.json();
-
+        console.log('cities data of selected country',data);
         // Check if the API returned valid data
-        if (!data.geonames || !Array.isArray(data.geonames)) {
-          throw new Error('No cities found for the selected country');
+        // if (!data.geonames || !Array.isArray(data.geonames)) {
+        //   throw new Error('No cities found for the selected country');
+        // }
+        const countrySel=selectedCountry.name.common;
+        const city = data.data; // Extract city names from the response
+        let cities = [];
+        // // Extract city names from the response
+        console.log('cities data of selected country',city);
+        for(let i of city){
+          // console.log('country from list selected',i.country)
+          if(i.country === countrySel){
+            console.log('cities of selected country',i.cities);
+            cities= i.cities;
+          }
+          
+        // console.log(`cities of selected country${selectedCountry.name.common}`, cities);
         }
-
-        // Extract city names from the response
-        const cities = data.geonames.map(city => city.name);
-
-        // Populate the city dropdown
+        console.log('cities of selected country from drop down list ',cities);
+        // // Populate the city dropdown
         citySelect.innerHTML = '<option value="">Select a city</option>';
         cities.forEach(city => {
           const option = document.createElement('option');
@@ -130,7 +149,8 @@
           option.textContent = city; // City name
           citySelect.appendChild(option);
         });
-
+        
+      
         citySelect.disabled = false;
       } catch (error) {
         console.error('Error fetching cities:', error);
@@ -140,6 +160,7 @@
 
     // Fetch weather data for the selected city and country
     async function getWeather() {
+      document.getElementById('resultWeather').innerHTML = ''; // Clear previous weather results
       const country = document.getElementById('country').value;
       const city = document.getElementById('city').value;
 
@@ -157,6 +178,32 @@
         if (data.cod !== 200) {
           throw new Error(data.message);
         }
+        const temp_min =data.main.temp_min;
+        const temp_max =data.main.temp_max;
+        const humidity = data.main.humidity;
+        const pressure=data.main.pressure;
+        const wind_spped=data.wind.speed;
+        const description = data.weather[0].description; // Weather description
+        const icon = data.weather[0].icon; // Weather icon code
+//         data.weather.forEach(weather =>{
+//           console.log('weather data of selected country',weather);
+//           // const description =weather.description;
+//           const icon=weather.icon;
+//         });
+//  // Weather description
+          const weatherIcon = `https://openweathermap.org/img/wn/${icon}.png`; // Weather icon URL
+
+          // Display the weather information
+          document.getElementById('resultWeather').innerHTML += `
+            <p>Weather: ${description}</p>
+            <img src="${weatherIcon}" alt="${description}">
+            <p>Temperature: ${temp_min}°C</p>
+            <p>Humidity: ${humidity}%</p>
+            <p>Pressure: ${pressure} hPa</p>
+            <p>Wind Speed: ${wind_spped} m/s</p>
+          `;
+        
+
 
         const sunrise = data.sys.sunrise; // Sunrise time (Unix timestamp)
         const sunset = data.sys.sunset; // Sunset time (Unix timestamp)
