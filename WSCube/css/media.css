@@ -1,0 +1,55 @@
+@media only screen and (min-width:200px) and (max-width:575px){
+    .btn-outer{
+        position:fixed;
+        bottom:0px;
+        left:0px;
+        width:100%;
+        /* z-index:1000; */
+        background-color: white;
+        justify-content: center!important;
+        padding:5px 0px;
+        font-size:13px;
+
+    }
+    .btn-call{
+        width:100%;
+        margin:0px;
+        border-radius:6px;
+        border:none;
+        padding:5px 0px;
+        background-color:rgb(67, 209, 10);
+        color:white;
+        font-size:13px;
+    }
+    .banner-content h1{
+        font-size: 27px !important;
+        font-weight: 700;
+        text-align: center;
+        line-height: 37px;
+    }
+    
+   .banner-content-btn{
+        flex-direction: column;
+    }
+
+    .demo-btn,.download-btn{
+        font-size:13px;
+        width:100% !important;
+        margin:0px;
+        border-radius:6px;
+        border:none;
+        padding:10px 0px;
+        background-color:rgb(67, 209, 10);
+        color:white;
+        margin-bottom:10px;
+       
+    
+    }
+    .banner-form{
+        padding:20px;
+    }
+
+    .highlights-section h2{
+        font-size:25px !important;
+
+}

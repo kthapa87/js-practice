@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script type="text/javascript">
+        // // Fetching data from the API
+
+        // fetch('https://randomuser.me/api/')
+
+        // .then(response => response.json())// convert the data in to human rdeable format
+
+        // // print the data from the response
+        // .then(data=> console.log(data))
+
+        // for(let i of data){
+        //     console.log(i.name.first + " " + i.name.last);
+        // }
+
+        // // catch any error that occurs during the fetch operation
+        // .catch(error => console.error('Error fetching data:', error));
+
+
+
+        async function fetchData(){
+
+            try{
+                const response = await fetch('https://randomuser.me/api/');
+                const data = await response.json(); // convert the data in to human rdeable format
+
+                // print the data from the response
+                console.log(data);
+                console.log('length of array',data.results.length);
+                // for(let i of data){
+                //     console.log(i.name.first + " " + i.name.last);
+                // }
+            }
+            catch(error){
+                console.log('Error fetching data:', error);
+            }
+
+        }
+        fetchData()
+    </script>
+</body>
+</html>
