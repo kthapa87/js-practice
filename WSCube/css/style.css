@@ -88,4 +88,99 @@ i{
     /* text-align: center; */
 }
 
-/* .assignment */
+.navbar-logo{
+    margin-left:110px;
+
+}
+.navbar-menu{
+    margin-right: 60px;
+    font-weight:600;
+}
+.navbar-menu ul li a {
+    position: relative; /* Required for absolute positioning of the pseudo-element */
+    text-decoration: none !important; /* Remove default underline */
+    color: inherit; /* Inherit color from parent */
+}
+
+.navbar-menu ul li a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px; /* Adjust thickness as needed */
+    background-color: #4cd964; /* Underline color */
+    transform: scaleX(0); /* Initially hide the underline */
+    transform-origin: left; /* Scale from the left */
+    transition: transform 0.3s ease; /* Animation speed and easing */
+}
+
+.navbar-menu ul li a:hover::after {
+    transform: scaleX(1); /* Show the underline on hover */
+}
+.navbar-menu ul li a:hover{
+    color: #4cd964 !important;
+    text-decoration: none !important;
+
+}
+/* .banner-img{
+
+    width: 100%;
+    height: 50%!important;
+    margin-top: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+} */
+.accordion-color:not(.active){
+    background:none
+}
+.accordion-color:focus{
+    background-color: #4cd964;
+    padding: 20px;
+    border:none;
+    outline:none;
+    box-shadow: none;;
+    /* border-radius: 10px; */
+    /* margin-top: 20px; */
+}
+
+.accordion-collapse {
+    overflow: hidden;
+    transition: height 0.6s ease, padding 0.4s ease; /* Height and padding animate smoothly */
+  }
+  .accordion-body {
+    animation: slideIn 0.5s ease-in-out;
+  }
+  
+  @keyframes slideIn {
+    from {
+      transform: translateY(-50px); /* Slide from above */
+      opacity: 0; /* Start invisible */
+    }
+    to {
+      transform: translateY(0); /* Set to the original position */
+      opacity: 1; /* Fully visible */
+    }
+  }
+
+.accordion-button::after {
+    content: '+'!important; /* Default icon */
+    font-size: 1.2rem;
+    margin-left: auto;
+    transition: transform 0.3s ease;
+    display: inline-block; /* Ensure content is displayed */
+    background-image: none !important; /* Hide the pseudo-element arrow */
+}
+
+.accordion-button:not(.collapsed)::after {
+    content: '-'!important; /* Icon when expanded */
+}
+
+/* Remove the default arrow icon */
+.accordion-button {
+    background-image: none !important;
+}
+.box-accordion{
+    border-radius: 8px;
+}
+
